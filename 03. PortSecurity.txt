@@ -1,0 +1,39 @@
+[int fast 0/1]
+en 
+conf t 
+int fast 0/1
+switchport mode access
+switchport port-security 
+switchport port-security maximum 2
+switchport port-security mac-address 00D0.5873.3B00
+switchport port-security mac-address 0001.4223.2027
+
+[int fast 0/2]
+en 
+conf t 
+int fast 0/2
+switchport mode access
+switchport port-security 
+switchport port-security mac-address 0001.638B.2C86
+
+[int fast 0/3]
+en 
+conf t 
+int fast 0/3
+switchport mode access
+switchport port-security 
+switchport port-security maximum 2
+switchport port-security mac-address sticky
+switchport port-security violation restrict
+
+[int fast 0/4]
+en 
+conf t 
+int fast 0/4
+switchport mode access
+switchport port-security
+switchport port-security mac-address sticky
+switchport port-security violation protect
+
+
+
