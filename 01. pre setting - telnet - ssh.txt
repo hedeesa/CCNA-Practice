@@ -1,0 +1,66 @@
+[Pre setting]
+
+en 
+conf t 
+enable secret [pass]
+username [user] secret [pass]
+line console 0 
+login local
+logging sync
+-----------------------------------
+[Telnet on switch]
+
+en 
+conf t 
+! telnet needs enable pass 
+! enable secret [pass]
+!
+! first you must have user/pass
+! username [user] secret [pass]
+!
+! Let 2 users to telnet 
+line vty 0 1
+login local 
+transport input telnet
+exit
+!
+! sw interface must have an ip address
+int vlan 1
+ip add [192.168.1.10] [255.255.255.0]
+no shut
+!
+-----------------------------------
+[ssh on Router]
+
+en 
+conf t 
+! ssh needs enable pass 
+! enable secret [pass]
+!
+! first you must have user/pass
+! username [user] secret [pass]
+! 
+! change hostname
+hostname [test]
+!
+! change domain-name
+ip domain-name [test.com]
+!
+crypto key generate rsa
+!
+! Let 2 users to ssh
+line vty 0 1
+login local 
+transport input ssh
+exit
+!
+! router interface must have an ip address
+int gig 0/0
+ip add [192.168.1.1] [255.255.255.0]
+no shut
+!
+-----------------------------------
+[for test from PC0]
+telnet [192.168.1.10]
+
+ssh -l [test] [192.168.1.1]
