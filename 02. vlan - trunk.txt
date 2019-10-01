@@ -1,0 +1,32 @@
+[vlan on SW1]
+
+en 
+conf t 
+int range fast 0/1-2 
+switchport access vlan 1o
+exit
+int range fast 0/3-4
+switchport access vlan 2o
+exit
+int range fast 0/5-6 
+switchport access vlan 3o
+exit
+int gig 0/1 
+switchport mode trunk
+
+
+[vlan on SW2]
+en 
+conf t 
+int fast 0/1
+switchport access vlan 10
+exit
+int fast 0/2
+switchport access vlan 20
+exit
+int fast 0/3
+switchport access vlan 30
+exit
+int gig 0/1 
+switchport mode trunk
+
