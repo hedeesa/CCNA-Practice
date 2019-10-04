@@ -1,0 +1,12 @@
+[Router]
+en 
+conf t 
+int gig 0/0 
+no shut 
+ip add 192.168.10.1 255.255.255.0 
+exit 
+ip dhcp pool mypool
+network 192.168.10.0 255.255.255.0 
+default-route 192.168.10.1 
+exit
+ip dhcp excluded-address 192.168.10.0 192.168.10.10
