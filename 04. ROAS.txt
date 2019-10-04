@@ -1,0 +1,48 @@
+[set vlans on SW]
+en 
+conf t 
+int range fast0/1-2
+sw access vlan 10
+exit 
+int range fast0/3-4
+sw access vlan 20
+exit 
+int range fast0/5-6
+sw access vlan 30
+exit 
+--------------------
+[set TRUNK on SW]
+en 
+conf t 
+int gig 0/1
+sw mode trunk 
+--------------------
+[set ROAS on Router]
+en
+conf t 
+int gig 0/0 
+no shut 
+exit
+int gig 0/0.10
+encapsulation dot1q 10
+ip add 192.168.10.1 255.255.255.0 
+int gig 0/0.20
+encapsulation dot1q 20
+ip add 192.168.20.1 255.255.255.0 
+int gig 0/0.30
+encapsulation dot1q 30
+ip add 192.168.30.1 255.255.255.0 
+--------------------
+[Set Telnet on vlan 10 on SW]
+en 
+conf t 
+username [test] secret [test]
+enable secret [test]
+int vlan 10 
+ip add 192.168.10.100 255.255.255.0 
+exit
+line vty 0 
+login local 
+exit
+ip default-gateway 192.168.10.1
+---------------------
